@@ -6,7 +6,6 @@ import energypy
 @ray.remote
 def collect_worker(
     n_rounds,
-    transition_server,
     parameter_server,
     *args,
     **kwargs
@@ -14,10 +13,13 @@ def collect_worker(
     """
     Runs in parallel with other collect workers
     """
+    data = []
     for _ in range(n_rounds):
-        transition_server.add_object_id.remote(
+        data.append(
             collect(parameter_server, *args, **kwargs)
         )
+
+    return data
 
 
 def collect(

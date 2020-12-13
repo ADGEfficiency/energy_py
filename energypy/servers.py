@@ -9,8 +9,8 @@ class TransitionServer:
     def get_object_ids(self):
         return self.object_ids
 
-    def add_object_id(self, new):
-        self.object_ids.append(new)
+    def add_object_ids(self, new):
+        self.object_ids.extend(new)
 
 
 @ray.remote
